@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Network Awakens</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .default-content img {
+            width: 100%;
+            height: 100vh;
+            object-fit: contain;
+        }
+        
+        .hidden-content {
+            display: none;
+        }
+        
+        .hidden-content video {
+            width: 100%;
+            height: 100vh;
+            object-fit: contain;
+        }
+        
+        .default-content img {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="default-content" id="defaultContent">
+            <img src="https://a4dkflzi5z7z52vzw4mmy2rby3o77cqiuxm33qmqo7xideav46da.arweave.net/Bwairyjuf57qubcYzGohxt3_igil2b3BkHfugZAV54Y" alt="Default Image" onclick="toggleContent()">
+        </div>
+        
+        <div class="hidden-content" id="hiddenContent">
+            <video autoplay loop muted webkit-playsinline playsinline onclick="toggleContent()" id="videoPlayer">
+                <source src="https://7snhmxgnogvbls4epie2hw5zp4ruwug5wtye576uxz5gnocxhx3a.arweave.net/_Jp2XM1xqhXLhHoJo9u5fyNLUN208E7_1L56ZrhXPfY" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <script>
+        // Toggle content function
+        function toggleContent() {
+            const defaultContent = document.getElementById('defaultContent');
+            const hiddenContent = document.getElementById('hiddenContent');
+            const video = document.getElementById('videoPlayer');
+            
+            if (defaultContent.style.display !== 'none') {
+                // Currently showing image, switch to video
+                defaultContent.style.display = 'none';
+                hiddenContent.style.display = 'block';
+                
+                // Start muted to allow autoplay and prevent fullscreen, then unmute after user interaction
+                video.muted = true;
+                video.play().then(() => {
+                    // After successful play, unmute for sound
+                    video.muted = false;
+                }).catch(error => {
+                    console.log('Video play failed:', error);
+                    // If autoplay fails, try playing without autoplay
+                    video.muted = false;
+                    video.play();
+                });
+            } else {
+                // Currently showing video, switch back to image
+                defaultContent.style.display = 'block';
+                hiddenContent.style.display = 'none';
+                video.pause();
+            }
+        }
+    </script>
+</body>
+</html>
