@@ -24,6 +24,8 @@
             width: 100%;
             height: 100vh;
             object-fit: contain;
+            display: block;
+            margin: 0 auto;
         }
         
         .hidden-content {
@@ -34,10 +36,56 @@
             width: 100%;
             height: 100vh;
             object-fit: contain;
+            display: block;
+            margin: 0 auto;
         }
         
         .default-content img {
             cursor: pointer;
+        }
+        
+        /* Ensure proper vertical centering on all devices */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .default-content,
+        .hidden-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Mobile-specific centering adjustments */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+            
+            .default-content img,
+            .hidden-content video {
+                max-height: 90vh;
+                width: auto;
+                max-width: 100%;
+            }
+        }
+        
+        /* Handle landscape orientation on mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .default-content img,
+            .hidden-content video {
+                max-height: 85vh;
+                max-width: 90vw;
+            }
         }
     </style>
 </head>
